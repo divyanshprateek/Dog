@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Login</h5>
+          <form class="form-signin" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-label-group">
+              <input
+                type="number"
+                id="inputEmail"
+                name="contactNum"
+                ngModel
+                class="form-control"
+                placeholder="Phone Number"
+                required
+                autofocus
+              />
+              <label for="inputEmail">Phone Number</label>
+            </div>
+
+            <div class="form-label-group">
+              <input
+                type="password"
+                name="password"
+                id="inputPassword"
+                class="form-control"
+                placeholder="Password"
+                ngModel
+                required
+              />
+              <label for="inputPassword">Password</label>
+            </div>
+            
+            <div class="form-label-group">
+                    <input
+                      type="password"
+                      name="password"
+                      id="inputPassword"
+                      class="form-control"
+                      placeholder="Confirm Password"
+                      ngModel
+                      required
+                    />
+                    <label for="inputPassword">Confirm Password</label>
+                  </div>
+            <button
+              class="btn btn-lg btn-primary btn-block text-uppercase"
+              type="submit"
+            >
+              Login
+            </button>
+            Not Yet Registered ? 
+            <button type="button" class="btn btn-outline-primary" (click)="onRegister()">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

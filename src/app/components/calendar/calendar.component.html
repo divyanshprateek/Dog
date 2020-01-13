@@ -1,0 +1,20 @@
+<div
+  class="card text-white bg-light mb-3 border border-white"
+  style="max-width: 50%;"
+>
+  <div
+    class="card-header bg-dark text-white text-center d-flex justify-content-between"
+    style="font-weight: bold; border-bottom: 2px solid #333;"
+  >
+    Note Pad
+    <span (click)="onClose()">
+      <fa-icon [icon]="close" [styles]="{ color: 'white' }"></fa-icon>
+    </span>
+  </div>
+  <div class="card-body">
+    <full-calendar
+      defaultView="dayGridMonth"
+      [plugins]="calendarPlugins"
+    ></full-calendar>
+  </div>
+</div>
