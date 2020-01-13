@@ -435,6 +435,7 @@
         <th scope="col" class="m-0 p-1 border-right border-white">Start Date</th>
         <th scope="col" class="m-0 p-1 border-right border-white">End Date</th>
         <th scope="col" class="m-0 p-1 border-right border-white">Pause Date</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">Pause Status</th>
         <th scope="col" class="m-0 p-1 border-right border-white">Products</th>
         <th scope="col" class="m-0 p-1 border-right border-white">
           Customer Name
@@ -492,6 +493,13 @@
         <th scope="col" class="m-0 p-1 border-right border-white">
           <input
             type="text"
+            placeholder="Pause Status"
+            class="form-control form-control-sm"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
             placeholder="Products"
             class="form-control form-control-sm"
           />
@@ -536,6 +544,10 @@
         </td>
         <td class="text-center text-success border-right">
           {{ i.pauseDate | date}}
+        </td>
+        <td class="text-center border-right" >
+          <span *ngIf="i.isPause" class="text-danger">Paused</span>
+          <span *ngIf="!i.isPause" class="text-success">Active</span>
         </td>
         <td class="text-center border-right">
           <div *ngFor="let d of i.orderDesc">
