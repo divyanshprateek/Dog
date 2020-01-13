@@ -24,9 +24,9 @@ export class DashboardComponent implements OnInit {
   faEdit = faEdit;
   faTrash = faTrashAlt;
   page: any;
-  collection = { count: 1000000, data: [] };
-  collection1 = { count: 1000000, data: [] };
-  collection2 = { count: 1000000, data: [] };
+  collection = { count: 100000, data: [] };
+  collection1 = { count: 100000, data: [] };
+  collection2 = { count: 100000, data: [] };
   newOrder: any;
   config: any;
   orders: any[] = [];
@@ -44,19 +44,21 @@ export class DashboardComponent implements OnInit {
   ) {
     this.config = {
       itemsPerPage: 10,
-      currentPage: 1
+      currentPage: 1,
+      totalItems: this.collection.data.length
     };
-    
+
     this.config1 = {
       itemsPerPage: 10,
-      currentPage: 1
+      currentPage: 1,
+      totalItems: this.collection1.data.length
     };
 
     this.config2 = {
       itemsPerPage: 10,
-      currentPage: 1
+      currentPage: 1,
+      totalItems: this.collection2.data.length
     };
-
   }
 
   ngOnInit() {
