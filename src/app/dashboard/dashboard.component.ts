@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit {
   }
 
   pageChanged2(event) {
-    this.config1.currentPage = event;
+    this.config2.currentPage = event;
   }
 
   onUpdate(order, select) {
@@ -230,34 +230,4 @@ export class DashboardComponent implements OnInit {
     this.collection.data = result;
     console.log(this.collection.data);
   }
-
-  // refresh() {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   const token = localStorage.getItem("ACCESS_TOKEN");
-
-  //   var index = token.indexOf(" ");
-  //   var tokenstr = token.substr(index + 1);
-
-  //   const httpHeaders = new HttpHeaders({
-  //     "Content-Type": "application/json",
-  //     Authorization: "Bearer validToke."
-  //   });
-  //   this.http
-  //     .get(`${this.url}/api/getDetailsDog/` + user._id + "/" + tokenstr)
-  //     .subscribe((data: any) => {
-  //       console.log(data);
-  //       this.newOrder = data.newOrder.sort(function(a, b) {
-  //         a = new Date(a.createdDate);
-  //         b = new Date(b.createdDate);
-  //         return a > b ? -1 : a < b ? 1 : 0;
-  //       });
-  //       for (let order of this.newOrder) {
-  //         this.collection.data = [];
-  //         this.collection.data.push({
-  //           id: order._id,
-  //           ...order
-  //         });
-  //       }
-  //     });
-  // }
 }
