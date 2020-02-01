@@ -1,0 +1,134 @@
+<navbar-cmp></navbar-cmp>
+
+<!-- Orders Table Start -->
+ <h1 class="text-center">All Orders</h1>
+ <a class="btn btn-primary-btn-lg" [routerLink]="['/orders']">Refresh</a>
+ <table class="table m-auto">
+   <thead class="thead-dark text-center m-2 p-1">
+     <tr>
+       <th scope="col" class="m-0 p-1 border-right border-white">Actions</th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         Order Number
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">Slot</th>
+       <th scope="col" class="m-0 p-1 border-right border-white">Status</th>
+       <th scope="col" class="m-0 p-1 border-right border-white">Products</th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         Customer Name
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">Address</th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         Mobile Number
+       </th>
+     </tr>
+     <tr>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <button class="btn btn-primary py-1">
+           <fa-icon
+             [icon]="faPlusCircle"
+             size="2x"
+             [styles]="{ color: 'white' }"
+           ></fa-icon>
+         </button>
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="text"
+           placeholder="Order Number"
+           class="form-control form-control-sm"
+         />
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="text"
+           placeholder="Slot"
+           class="form-control form-control-sm"
+         />
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <select class="form-control form-control-sm">
+           <option value="1" class="text-success">New</option>
+           <option value="2" class="text-warning">Accepted</option>
+           <option value="3" class="text-danger">Cancelled</option>
+           <option value="3" class="text-primary">Completed</option>
+         </select>
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="text"
+           placeholder="Products"
+           class="form-control form-control-sm"
+         />
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="text"
+           placeholder="Customer Name"
+           class="form-control form-control-sm"
+           #name
+           (change)="onFilter(name)"
+         />
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="text"
+           placeholder="Address"
+           class="form-control form-control-sm"
+         />
+       </th>
+       <th scope="col" class="m-0 p-1 border-right border-white">
+         <input
+           type="number"
+           placeholder="Mobile"
+           class="form-control form-control-sm"
+         />
+       </th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr class="border" *ngFor="let i of collection.data | paginate: config">
+       <td scope="row" class="border-right">
+         <div style="font-size: 0.7rem;" class="text-dark">
+           {{ i.createdDate | date }}
+         </div>
+         <div class="d-flex justify-content-center">
+           <span (click)="onUpdate(i,select)"
+             ><fa-icon
+               [icon]="faEdit"
+               [styles]="{ color: 'skyblue' }"
+             ></fa-icon>
+           </span>
+         </div>
+       </td>
+       <td class="text-center border-right">{{ i.orderId }}</td>
+       <td class="text-center border-right">{{ i.slot }}</td>
+       <td class="text-center text-success border-right">
+         {{ i.status }}
+         <select class="form-control form-control-sm" #select>
+           <option value="new" class="text-success">New</option>
+           <option value="accepted" class="text-warning">Accepted</option>
+           <option value="cancelled" class="text-danger">Cancelled</option>
+           <option value="completed" class="text-primary">Completed</option>
+         </select>
+       </td>
+       <td class="text-center border-right">
+         <div *ngFor="let d of i.orderDesc">
+           Name: {{ d.productName }} | Cost:
+           {{ d.productCost }} | Quantity: {{d.count}} | Size: {{ d.productQuantity }} | Category:
+           {{ d.categoryName }} | SubCategory: {{ d.productSubCategory }} | Vendor: {{ d.productVendorName }} 
+           <hr>
+         </div>
+         <div>
+           <span class="text-success">Total Amount: </span> {{i.totalAmount | currency:'INR':'symbol'}}
+         </div>
+       </td>
+       <td class="text-center border-right">{{ i.userName }}</td>
+       <td class="text-center border-right">{{ i.add }}</td>
+       <td class="text-center">{{ i.contactNum }}</td>
+     </tr>
+   </tbody>
+ </table>
+ <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+ <!-- Orders Table End -->
+
+ <footer-cmp></footer-cmp>

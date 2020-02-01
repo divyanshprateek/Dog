@@ -19,6 +19,7 @@ import { OrdersTableComponent } from '../components/orders-table/orders-table.co
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 
 @NgModule({
   declarations: [

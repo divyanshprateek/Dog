@@ -29,6 +29,18 @@ const routes: Routes = [
   {
     path: "register",
     loadChildren: "./register/register.module#RegisterModule"
+  },
+  {
+    path: "orders",
+    loadChildren: "./dashboard/orders/orders.module#OrdersModule"
+  },
+  {
+    path: "subscriptions",
+    loadChildren: "./dashboard/subscriptions/subscriptions.module#SubscriptionsModule"
+  },
+  {
+    path: "services",
+    loadChildren: "./dashboard/services/services.module#ServicesModule"
   }
 ];
 

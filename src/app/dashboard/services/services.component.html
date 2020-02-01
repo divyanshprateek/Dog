@@ -1,0 +1,124 @@
+<navbar-cmp></navbar-cmp>
+  <!-- Services start -->
+  <h1 class="text-center">Service Requests</h1>
+  <table class="table m-auto">
+    <thead class="thead-dark text-center m-2 p-1">
+      <tr>
+        <th scope="col" class="m-0 p-1 border-right border-white">Actions</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          Order Number
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">Event Date/Time</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">Status</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">Order Type</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          Customer Name
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">Address</th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          Mobile Number
+        </th>
+      </tr>
+      <tr>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <button class="btn btn-primary py-1">
+            <fa-icon
+              [icon]="faPlusCircle"
+              size="2x"
+              [styles]="{ color: 'white' }"
+            ></fa-icon>
+          </button>
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
+            placeholder="Order Number"
+            class="form-control form-control-sm"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
+            placeholder="Date/Time"
+            class="form-control form-control-sm"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <select class="form-control form-control-sm">
+            <option value="1" class="text-success">New</option>
+            <option value="2" class="text-warning">Accepted</option>
+            <option value="3" class="text-danger">Cancelled</option>
+            <option value="3" class="text-primary">Completed</option>
+          </select>
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
+            placeholder="Order Type"
+            class="form-control form-control-sm"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
+            placeholder="Customer Name"
+            class="form-control form-control-sm"
+            #nameService
+            (change)="onFilterService(nameService)"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="text"
+            placeholder="Address"
+            class="form-control form-control-sm"
+          />
+        </th>
+        <th scope="col" class="m-0 p-1 border-right border-white">
+          <input
+            type="number"
+            placeholder="Mobile"
+            class="form-control form-control-sm"
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="border" *ngFor="let i of collection2.data | paginate: config2">
+        <td scope="row" class="border-right">
+          <div style="font-size: 0.7rem;" class="text-dark">
+            {{ i.createdDate | date }}
+          </div>
+          <div class="d-flex justify-content-center">
+            <span (click)="onUpdateService(i,selectService)"
+              ><fa-icon
+                [icon]="faEdit"
+                [styles]="{ color: 'skyblue' }"
+              ></fa-icon>
+            </span>
+          </div>
+        </td>
+        <td class="text-center border-right">{{ i.orderId }}</td>
+      <td class="text-center border-right">Date: {{ i.eventDate }} / <span style="color:red;">Time:</span>{{i.time}}</td>
+        <td class="text-center text-success border-right">
+          {{ i.status }}
+          <select class="form-control form-control-sm" #selectService>
+            <option value="new" class="text-success">New</option>
+            <option value="accepted" class="text-warning">Accepted</option>
+            <option value="cancelled" class="text-danger">Cancelled</option>
+            <option value="completed" class="text-primary">Completed</option>
+          </select>
+        </td>
+        <td class="text-center border-right">
+          {{i.orderType}}
+        </td>
+        <td class="text-center border-right">{{ i.userName }}</td>
+        <td class="text-center border-right">{{ i.add }}</td>
+        <td class="text-center">{{ i.contactNum }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChanged2($event)"></pagination-controls>
+  <!-- Services End -->
+
+  <footer-cmp></footer-cmp>
