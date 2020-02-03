@@ -90,6 +90,7 @@
        <td scope="row" class="border-right">
          <div style="font-size: 0.7rem;" class="text-dark">
            {{ i.createdDate | date }}
+           {{ i.createdDate | date : 'HH:mm'}}
          </div>
          <div class="d-flex justify-content-center">
            <span (click)="onUpdate(i,select)"

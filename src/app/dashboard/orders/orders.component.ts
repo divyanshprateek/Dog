@@ -61,6 +61,7 @@ export class OrdersComponent implements OnInit {
           return a > b ? -1 : a < b ? 1 : 0;
         });
         for (let order of this.newOrder) {
+          console.log(order.createdDate);
           this.collection.data.push({
             id: order._id,
             ...order
