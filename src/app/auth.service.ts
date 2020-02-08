@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   res: any;
-
+  url: string = "http://13.233.55.160";
   AUTH_SERVER_ADDRESS: string = "http://13.233.55.160";
   authSubject = new BehaviorSubject(false);
   _user: any;
@@ -99,5 +99,20 @@ export class AuthService {
   
     get user() {
       return this._user;
+    }
+
+    getData(): Observable<any> {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = localStorage.getItem("ACCESS_TOKEN");
+      var index = token.indexOf(" ");
+      var tokenstr = token.substr(index + 1);
+  
+      const httpHeaders = new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer validToke."
+      });
+      console.log(this.http);
+      return this.http
+        .get(`${this.url}/api/getDogOrders/` + user._id + "/" + tokenstr)
     }
 }

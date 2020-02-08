@@ -37,6 +37,8 @@ export class ServicesComponent implements OnInit {
       currentPage: 1,
       totalItems: this.collection2.data.length
     };
+
+    setInterval(this.ngOnInit, 180000);
   }
 
   ngOnInit() {
@@ -116,6 +118,5 @@ export class ServicesComponent implements OnInit {
 
     this.collection2.data = result;
   }
-
 
 }

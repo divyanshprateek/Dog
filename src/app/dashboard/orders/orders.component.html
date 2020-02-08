@@ -2,7 +2,11 @@
 
 <!-- Orders Table Start -->
  <h1 class="text-center">All Orders</h1>
- <a class="btn btn-primary-btn-lg" [routerLink]="['/orders']">Refresh</a>
+ <button class="btn btn-primary-btn-lg" (click)="refresh()">Refresh</button>
+ <div class="alert alert-success alert-dismissible" *ngIf="updateStatus">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeStatus()">&times;</button>
+  <strong>Success!</strong> Udated Status Successfully
+</div>
  <table class="table m-auto">
    <thead class="thead-dark text-center m-2 p-1">
      <tr>
@@ -104,7 +108,10 @@
        <td class="text-center border-right">{{ i.orderId }}</td>
        <td class="text-center border-right">{{ i.slot }}</td>
        <td class="text-center text-success border-right">
-         {{ i.status }}
+         <span *ngIf="i.status == 'new'" class="text-success">{{ i.status }}</span>
+         <span *ngIf="i.status == 'Accepted'" class="text-warning">{{ i.status }}</span>
+         <span *ngIf="i.status == 'cancelled'" class="text-danger">{{ i.status }}</span>
+         <span *ngIf="i.status == 'completed'" class="text-primary">{{ i.status }}</span>
          <select class="form-control form-control-sm" #select>
            <option value="new" class="text-success">New</option>
            <option value="accepted" class="text-warning">Accepted</option>

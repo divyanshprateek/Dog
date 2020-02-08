@@ -37,6 +37,7 @@ export class SubscriptionsComponent implements OnInit {
       currentPage: 1,
       totalItems: this.collection1.data.length
     };
+    setInterval(this.ngOnInit, 180000);
   }
 
   ngOnInit() {

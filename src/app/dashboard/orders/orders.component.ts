@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import {
   faCoffee,
@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,8 +16,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  
   url: string = "http://13.233.55.160";
   faCoffee = faCoffee;
+  updateStatus = false;
   faPlusCircle = faPlusCircle;
   faEdit = faEdit;
   faTrash = faTrashAlt;
@@ -32,7 +35,7 @@ export class OrdersComponent implements OnInit {
   services: any;
   config2: any;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private orderService: AuthService) {
     this.config = {
       itemsPerPage: 10,
       currentPage: 1,
@@ -50,7 +53,7 @@ export class OrdersComponent implements OnInit {
       "Content-Type": "application/json",
       Authorization: "Bearer validToke."
     });
-
+    console.log(this.http);
     this.http
       .get(`${this.url}/api/getDogOrders/` + user._id + "/" + tokenstr)
       .subscribe((data: any) => {
@@ -61,7 +64,6 @@ export class OrdersComponent implements OnInit {
           return a > b ? -1 : a < b ? 1 : 0;
         });
         for (let order of this.newOrder) {
-          console.log(order.createdDate);
           this.collection.data.push({
             id: order._id,
             ...order
@@ -70,12 +72,31 @@ export class OrdersComponent implements OnInit {
       });
   }
 
+  refresh() {
+    this.orderService.getData().subscribe(data => {
+      this.newOrder = data.orders.sort(function(a, b) {
+        a = new Date(a.createdDate);
+        b = new Date(b.createdDate);
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+      this.collection.data = [];
+      for (let order of this.newOrder) {
+        this.collection.data.push({
+          id: order._id,
+          ...order
+        });
+      }
+
+    });
+  }
+
 
   pageChanged(event) {
     this.config.currentPage = event;
   }
 
   onUpdate(order, select) {
+    this.updateStatus = false;
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("ACCESS_TOKEN");
 
@@ -86,6 +107,7 @@ export class OrdersComponent implements OnInit {
       "Content-Type": "application/json",
       Authorization: "Bearer validToke."
     });
+    console.log(this.http);
     this.http
       .post(`${this.url}/api/updateOrderDog/`, {
         orderId: order._id,
@@ -95,7 +117,8 @@ export class OrdersComponent implements OnInit {
         status: select.value
       })
       .subscribe((data: any) => {
-        console.log(data);
+        this.updateStatus = true;
+        this.refresh();
       });
   }
 
@@ -108,4 +131,7 @@ export class OrdersComponent implements OnInit {
     console.log(this.collection.data);
   }
 
+  changeStatus() {
+    this.updateStatus = false;
+  }
 }
