@@ -109,7 +109,7 @@
        <td class="text-center border-right">{{ i.slot }}</td>
        <td class="text-center text-success border-right">
          <span *ngIf="i.status == 'new'" class="text-success">{{ i.status }}</span>
-         <span *ngIf="i.status == 'Accepted'" class="text-warning">{{ i.status }}</span>
+         <span *ngIf="i.status == 'accepted'" class="text-warning">{{ i.status }}</span>
          <span *ngIf="i.status == 'cancelled'" class="text-danger">{{ i.status }}</span>
          <span *ngIf="i.status == 'completed'" class="text-primary">{{ i.status }}</span>
          <select class="form-control form-control-sm" #select>
