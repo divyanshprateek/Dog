@@ -45,7 +45,7 @@
     "@swimlane/ngx-charts": "^10.1.0",
     "@types/googlemaps": "3.36.5",
     "@types/jquery": "^3.3.31",
-    "ajv": "6.10.0",
+    "ajv": "6.12.3",
     "angular-tree-component": "7.2.0",
     "angular2-chartjs": "0.4.1",
     "angular2-toaster": "^7.0.0",
